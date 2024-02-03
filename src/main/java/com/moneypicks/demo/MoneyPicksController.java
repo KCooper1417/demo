@@ -7,9 +7,6 @@ import java.util.Scanner;
 
 public class MoneyPicksController {
     public static void main(String[] args) {
-        List<Integer> winningNumbers = generateWinningNumbers();
-        System.out.println("Winning numbers: " + winningNumbers);
-
         List<Integer> userPicks = getUserPicks();
         System.out.println("Guessed numbers: " + userPicks);
 
@@ -36,23 +33,18 @@ public class MoneyPicksController {
     private static List<Integer> getUserPicks() {
         List<Integer> userPicks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your 3 picks here");
-        for (int i = 0; i < 3; i++) {
-            while (true) {
-                String numberString = scanner.nextLine();
-                try {
-                    int number = Integer.parseInt(numberString);
-                    if (number >= 0 && number <= 999) {
-                        userPicks.add(number);
-                        break;
-                    } else {
-                        System.out.println(number + " is not between 000 and 999. Try again.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a valid number.");
-                }
-            }
+        System.out.println("Enter your pick 3 numbers here seperated with a space. [1 2 3]");
+        
+        for(int i = 1; i <= 3; i++){
+            int pick = scanner.nextInt();
+            userPicks.add(pick);
         }
+
+        List<Integer> winningNumbers = generateWinningNumbers();
+        System.out.println("Winning numbers: " + winningNumbers);
+
         return userPicks;
+
+        
     }
 }

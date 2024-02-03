@@ -7,9 +7,7 @@ public class MoneyPicksService {
     public String determineOutcome(List<Integer> userPicks, List<Integer> winningNumbers) {
         int matchingNumbers = countMatchingNumbers(userPicks, winningNumbers);
 
-        String outcome = determineOutcomeText(matchingNumbers);
-
-        return outcome;
+        return determineOutcomeText(matchingNumbers);
     }
 
     private int countMatchingNumbers(List<Integer> userPicks, List<Integer> winningNumbers) {
