@@ -15,11 +15,7 @@ public class MoneyPicksGames {
     }
 
     public String getGame() {
-        return "PlaceholderGameResult";
-    }
-
-    public String winningPicks() {
-        return "PlaceholderGameResult";
+        return game;
     }
 
     public void setNumber(String number) {
@@ -31,9 +27,9 @@ public class MoneyPicksGames {
     }
 
     public String winningPicks(String pick3, String pick4) {
-        if (pick1.equals("Pick 3")) {
+        if (pick3.equals("Pick 3")) {
             return "Pick 3 wins!";
-        } else if (pick2.equals("Pick 4")) {
+        } else if (pick4.equals("Pick 4")) {
             return "Pick 4 wins!";
         } else {
             return "No winning pick!";
@@ -49,5 +45,4 @@ public class MoneyPicksGames {
             return "Sorry, none of your picks match the winning combination.";
         }
     }
-    
 }
