@@ -10,6 +10,22 @@
 
     <div class="container">
         <h1>Money Picks</h1>
+        <h2>Winning Numbers:</h2>
+        <p th:text="${winningNumbers}"></p>
+        <!-- You can add more result details here -->
+    </div>
+
+    <div class="container">
+        <h2>Your Picks</h2>
+        <form action="/submitPicks" method="post">
+            <label for="pick1">Pick 1:</label>
+            <input type="text" id="pick1" name="pick1"><br><br>
+            <label for="pick2">Pick 2:</label>
+            <input type="text" id="pick2" name="pick2"><br><br>
+            <label for="pick3">Pick 3:</label>
+            <input type="text" id="pick3" name="pick3"><br><br>
+            <button type="submit">Submit Picks</button>
+        </form>
         <p id="result">Result: </p>
         <button id="generateButton">Generate Number</button>
     </div>
