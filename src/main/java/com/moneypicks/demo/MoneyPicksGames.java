@@ -26,20 +26,10 @@ public class MoneyPicksGames {
         this.game = game;
     }
 
-    public String winningPicks(String pick3, String pick4) {
-        if (pick3.equals("Pick 3")) {
-            return "Pick 3 wins!";
-        } else if (pick4.equals("Pick 4")) {
-            return "Pick 4 wins!";
-        } else {
-            return "No winning pick!";
-        }
-    }
-
-    public String winningPicks(String pick1, String pick2, String winningPick1, String winningPick2) {
-        if (pick1.equals(winningPick1) && pick2.equals(winningPick2)) {
+    public String determineOutcome(String userPick1, String userPick2, String winningPick1, String winningPick2) {
+        if (userPick1.equals(winningPick1) && userPick2.equals(winningPick2)) {
             return "Jackpot! Both picks match the winning combination.";
-        } else if (pick1.equals(winningPick1) || pick2.equals(winningPick2)) {
+        } else if (userPick1.equals(winningPick1) || userPick2.equals(winningPick2)) {
             return "Congratulations! One pick matches the winning combination.";
         } else {
             return "Sorry, none of your picks match the winning combination.";

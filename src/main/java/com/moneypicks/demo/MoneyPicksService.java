@@ -1,23 +1,37 @@
 package com.moneypicks.demo;
 
+import java.util.List;
+
 public class MoneyPicksService {
 
-    public static void main(String[] args) {
-        MoneyPicksGames moneyPicksGame = new MoneyPicksGames("123", "Pick 3");
-        String result = moneyPicksGame.winningPicks("Pick 3", "Pick 4");
-        System.out.println("Result: " + result);
+    public String determineOutcome(List<Integer> userPicks, List<Integer> winningNumbers) {
+        int matchingNumbers = countMatchingNumbers(userPicks, winningNumbers);
 
-        System.out.println("Number: " + moneyPicksGame.getNumber());
-        System.out.println("Game: " + moneyPicksGame.getGame());
+        String outcome = determineOutcomeText(matchingNumbers);
+
+        return outcome;
     }
 
-    public String winningPicks() {
-        return "PlaceholderGameResult";
+    private int countMatchingNumbers(List<Integer> userPicks, List<Integer> winningNumbers) {
+        int count = 0;
+        for (int userPick : userPicks) {
+            if (winningNumbers.contains(userPick)) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    public String winningPicks(String pick1, String pick2) {
-        // Implement the logic to determine the winning picks
-        // For now, let's return a placeholder result
-        return "PlaceholderGameResult";
+    private String determineOutcomeText(int matchingNumbers) {
+        switch (matchingNumbers) {
+            case 3:
+                return "Congratulations! You've won the jackpot!";
+            case 2:
+                return "Congratulations! You've matched 2 numbers!";
+            case 1:
+                return "Congratulations! You've matched 1 number!";
+            default:
+                return "Sorry, you didn't match any numbers. Better luck next time!";
+        }
     }
 }
