@@ -18,33 +18,33 @@ public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
-}
+//}
 
-@Controller
-class MoneyPicksController {
+// @Controller
+// class MoneyPicksController {
 
-    private List<Integer> winningNumbers;
+//     private List<Integer> winningNumbers;
 
-    @GetMapping("/pick")
-    public String showPickPage() {
-        return "index";
-    }
+//     @GetMapping("/pick")
+//     public String showPickPage() {
+//         return "index";
+//     }
 
-    @PostMapping("/userPicks")
-    public String submitUserPicks(@RequestParam("pick1") int pick1,
-                                  @RequestParam("pick2") int pick2,
-                                  @RequestParam("pick3") int pick3,
-                                  Model model) {
-        generateWinningNumbers();
-        model.addAttribute("winningNumbers", winningNumbers);
-        return "result";
-    }
+//     @PostMapping("/userPicks")
+//     public String submitUserPicks(@RequestParam("pick1") int pick1,
+//                                   @RequestParam("pick2") int pick2,
+//                                   @RequestParam("pick3") int pick3,
+//                                   Model model) {
+//         generateWinningNumbers();
+//         model.addAttribute("winningNumbers", winningNumbers);
+//         return "result";
+//     }
 
-    private void generateWinningNumbers() {
-        winningNumbers = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            winningNumbers.add(random.nextInt(1000));
-        }
-    }
+    // private void generateWinningNumbers() {
+    //     winningNumbers = new ArrayList<>();
+    //     Random random = new Random();
+    //     for (int i = 0; i < 3; i++) {
+    //         winningNumbers.add(random.nextInt(1000));
+    //     }
+    // }
 }
