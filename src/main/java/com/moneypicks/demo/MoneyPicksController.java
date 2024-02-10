@@ -1,58 +1,38 @@
 package com.moneypicks.demo;
 
-import java.util.ArrayList;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
+@Controller
 public class MoneyPicksController {
-    public static void main(String[] args) {
-        List<Integer> winningNumbers = generateWinningNumbers();
-        System.out.println("Winning numbers: " + winningNumbers);
 
-        List<Integer> userPicks = getUserPicks();
-        System.out.println("Guessed numbers: " + userPicks);
+    private final MoneyPicksService moneyPicksService;
 
-        MoneyPicksService service = new MoneyPicksService();
-        String outcome = service.determineOutcome(userPicks, winningNumbers);
-        System.out.println(outcome);
+    public MoneyPicksController(MoneyPicksService moneyPicksService) {
+        this.moneyPicksService = moneyPicksService;
     }
 
-    private static List<Integer> generateWinningNumbers() {
-        List<Integer> winningNumbers = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            while (true) {
-                int winningNumber = random.nextInt(1000); // Generates numbers between 0 and 999
-                if (!winningNumbers.contains(winningNumber)) {
-                    winningNumbers.add(winningNumber);
-                    break;
-                }
-            }
-        }
-        return winningNumbers;
+    @GetMapping("/pick")
+    public String showPickPage() {
+        return "index";
     }
 
-    private static List<Integer> getUserPicks() {
-        List<Integer> userPicks = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your 3 picks here");
-        for (int i = 0; i < 3; i++) {
-            while (true) {
-                String numberString = scanner.nextLine();
-                try {
-                    int number = Integer.parseInt(numberString);
-                    if (number >= 0 && number <= 999) {
-                        userPicks.add(number);
-                        break;
-                    } else {
-                        System.out.println(number + " is not between 000 and 999. Try again.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a valid number.");
-                }
-            }
-        }
-        return userPicks;
+    @PostMapping("/userPicks")
+    public String submitUserPicks(@RequestParam("pick1") int pick1,
+                                  @RequestParam("pick2") int pick2,
+                                  @RequestParam("pick3") int pick3,
+                                  Model model) {
+        List<Integer> userPicks = List.of(pick1, pick2, pick3);
+        List<Integer> winningNumbers = moneyPicksService.generateWinningNumbers();
+        model.addAttribute("winningNumbers", winningNumbers);
+        String outcome = moneyPicksService.determineOutcome(userPicks, winningNumbers);
+        model.addAttribute("outcome", outcome);
+        return "result";
     }
+
 }

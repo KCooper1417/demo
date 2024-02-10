@@ -1,20 +1,32 @@
 package com.moneypicks.demo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MoneyPicksService {
 
-    // Method to compare user picks with winning numbers and determine the outcome
-    public String determineOutcome(List<Integer> userPicks, List<Integer> winningNumbers) {
-        // Count the number of matching numbers between userPicks and winningNumbers
-        int matchingNumbers = countMatchingNumbers(userPicks, winningNumbers);
+    public List<Integer> generateWinningNumbers() {
+        List<Integer> winningNumbers = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 3; i++) {
+            while (true) {
+                int winningNumber = random.nextInt(1000); 
+                if (!winningNumbers.contains(winningNumber)) {
+                    winningNumbers.add(winningNumber);
+                    break;
+                }
+            }
+        }
+        return winningNumbers;
+    }
 
-        // Determine the outcome based on the number of matching numbers
+    public String determineOutcome(List<Integer> userPicks, List<Integer> winningNumbers) {
+        int matchingNumbers = countMatchingNumbers(userPicks, winningNumbers);
         return determineOutcomeText(matchingNumbers);
     }
 
-    // Method to count the number of matching numbers between user picks and winning numbers
-    private int countMatchingNumbers(List<Integer> userPicks, List<Integer> winningNumbers) {
+    public int countMatchingNumbers(List<Integer> userPicks, List<Integer> winningNumbers) {
         int count = 0;
         for (int userPick : userPicks) {
             if (winningNumbers.contains(userPick)) {
@@ -24,9 +36,7 @@ public class MoneyPicksService {
         return count;
     }
 
-    // Method to determine the outcome text based on the number of matching numbers
-    private String determineOutcomeText(int matchingNumbers) {
-        // Determine the outcome text based on the number of matching numbers
+    public String determineOutcomeText(int matchingNumbers) {
         switch (matchingNumbers) {
             case 3:
                 return "Congratulations! You've won the jackpot!";
