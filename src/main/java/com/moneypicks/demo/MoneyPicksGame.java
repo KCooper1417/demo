@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MoneyPickGames {
+public class MoneyPicksGame {
     
     private String playerPick;
     private String gameType;
 
-    public MoneyPickGames(String playerPick, String gameType) {
+    public MoneyPicksGame(String playerPick, String gameType) {
         this.playerPick = playerPick;
         this.gameType = gameType;
     }
@@ -30,7 +30,7 @@ public class MoneyPickGames {
         }
     }
 
-    public String determineOutcome(MoneyPickGames winningGame) {
+    public String determineOutcome(MoneyPicksGame winningGame) {
         if (playerPick.equals(winningGame.getPlayerPick()) && gameType.equals(winningGame.getGameType())) {
             return "Jackpot! Your pick and game type match the winning combination.";
         } else {
@@ -38,5 +38,4 @@ public class MoneyPickGames {
         }
     }
 }
-
 
