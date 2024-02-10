@@ -3,7 +3,8 @@ package com.moneypicks.demo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import org.springframework.stereotype.Service;
+@Service
 public class MoneyPicksService {
 
     public List<Integer> generateWinningNumbers() {
