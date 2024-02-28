@@ -29,17 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send(JSON.stringify(data));
     });
 
-    // Form submission event listener
     document.getElementById("picksForm").addEventListener("submit", function(event) {
-        // Prevent default form submission behavior
         event.preventDefault();
 
-        // Extract data from form fields
         var pick1 = document.getElementById("pick1").value;
         var pick2 = document.getElementById("pick2").value;
         var pick3 = document.getElementById("pick3").value;
 
-        // Example: Update UI with form data
         document.getElementById("outcome").textContent = "Results: " + pick1 + ", " + pick2 + ", " + pick3;
     });
 });
