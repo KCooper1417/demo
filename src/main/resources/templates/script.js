@@ -38,4 +38,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById("outcome").textContent = "Results: " + pick1 + ", " + pick2 + ", " + pick3;
     });
+
+    function signUpUser(username, email, password) {
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email, password })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('User signed up successfully!');
+            } else {
+                console.error('Sign-up failed:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error during sign-up:', error);
+        });
+    }
+    
+    function validateForm(event) {
+        event.preventDefault();
+        var username = document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirm-password').value;
+        var errorMessage = '';
+    
+        if (errorMessage) {
+            document.getElementById('error-message').textContent = errorMessage;
+        } else {
+            signUpUser(username, email, password);
+        }
+    }
+    
+    document.getElementById('signupForm').addEventListener('submit', validateForm);
+    
 });
